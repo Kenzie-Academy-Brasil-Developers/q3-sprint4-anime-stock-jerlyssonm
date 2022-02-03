@@ -2,8 +2,10 @@ from app.models import DataBaseConnect
 from psycopg2 import sql
 
 
-class Anime(DataBaseConnect):
-    keys = ["id", "anime", "released_date", "seasons"]
+class Anime(DataBaseConnect):    
+    base_keys= ["anime", "released_date", "seasons"]
+    used_keys= ["id", "anime", "released_date", "seasons"]
+
     def __init__(self, **kwargs):
         self.anime = kwargs["anime"].title()
         self.released_date = kwargs["released_date"]
@@ -12,7 +14,6 @@ class Anime(DataBaseConnect):
     
     def insert_anime(self):
         self.create_table()
-
         self.get_conn_cur()
 
         query = """
@@ -28,7 +29,6 @@ class Anime(DataBaseConnect):
         inserted_anime = self.cur.fetchone()
 
         self.commit_and_close()
-
         return inserted_anime
     
     @classmethod
@@ -42,6 +42,7 @@ class Anime(DataBaseConnect):
 
         cls.commit_and_close()
         return all_animes
+
 
     @classmethod
     def get_anime_by_id(cls, anime_id):
@@ -57,6 +58,7 @@ class Anime(DataBaseConnect):
         cls.commit_and_close()
 
         return anime
+        
 
     @classmethod
     def update_anime_info(cls, anime_id, payload):
@@ -83,11 +85,9 @@ class Anime(DataBaseConnect):
 
         cls.cur.execute(query)
         update_anime = cls.cur.fetchone()
-
         cls.commit_and_close()
 
-        return update_anime
-            
+        return update_anime            
 
 
     @classmethod
@@ -104,8 +104,9 @@ class Anime(DataBaseConnect):
         cls.commit_and_close()
         return anime
 
+
     @staticmethod
-    def serialize_data(data, keys= keys):
+    def serialize_data(data, keys= used_keys):
         if type(data) is tuple:
             return dict(zip(keys, data))
         if type(data) is list:

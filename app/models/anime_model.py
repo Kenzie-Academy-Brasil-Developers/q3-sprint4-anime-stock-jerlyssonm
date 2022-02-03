@@ -1,4 +1,5 @@
 from app.models import DataBaseConnect
+from psycopg2 import sql
 
 
 class Anime(DataBaseConnect):
@@ -55,6 +56,52 @@ class Anime(DataBaseConnect):
         anime = cls.cur.fetchone()
         cls.commit_and_close()
 
+        return anime
+
+    @classmethod
+    def update_anime_info(cls, anime_id, payload):
+        cls.get_conn_cur()
+
+        columns = [sql.Identifier(key) for key in payload.keys()]
+        values = [sql.Literal(value) for value in payload.values()]
+
+        query = sql.SQL(
+            """
+                UPDATE
+                    animes
+                SET
+                    ({columns}) = ROW({values})
+                WHERE
+                    id = {id}
+                RETURNING *
+            """
+        ).format(
+            id = sql.Literal(anime_id),
+            columns = sql.SQL(",").join(columns),
+            values = sql.SQL(",").join(values),
+        )
+
+        cls.cur.execute(query)
+        update_anime = cls.cur.fetchone()
+
+        cls.commit_and_close()
+
+        return update_anime
+            
+
+
+    @classmethod
+    def delete_anime_by_id(cls, anime_id:int):
+        cls.get_conn_cur()
+
+        query = f"""
+            DELETE FROM animes
+            WHERE id = {anime_id}
+            RETURNING *;
+        """
+        cls.cur.execute(query)
+        anime = cls.cur.fetchone()
+        cls.commit_and_close()
         return anime
 
     @staticmethod

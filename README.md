@@ -12,41 +12,41 @@
 - PATCH /animes/id
 - DELETE /animes/id
 
-**Usage examples with some necessary data**
+# Usage examples with some necessary data**
 
-# GET /animes with data
+### GET /animes with data
 ![with data](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/get/get.png)
 
-# GET /animes no data
+### GET /animes no data
 ![no data](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/get/get_sem_tabela.png)
 
-# GET /animes/id with id Exist
+### GET /animes/id with id Exist
 ![get](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/get/get_by_id.png)
 
-# GET /animes/id with id non-Existent
+### GET /animes/id with id non-Existent
 ![get](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/get/get_by_id_sem_tabela.png)
 
 
-# POST /animes with correct data
+### POST /animes with correct data
 ![post](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/post/post.png)
 
-# POST /animes incorrect date
+### POST /animes incorrect date
 ![post](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/post/post_invalid_keys.png)
 
-# POST /animes with existing data
+### POST /animes with existing data
 ![post](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/post/post_already_exists.png)
 
-# PATCH /animes/id with correct keys
+### PATCH /animes/id with correct keys
 ![patch](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/patch/patch.png) 
 
-# PATCH /animes/id with incorrect keys
+### PATCH /animes/id with incorrect keys
 ![patch](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/patch/patch_chaves_invalidas.png)
 
-# PATCH /animes/id with non-existent id
+### PATCH /animes/id with non-existent id
 ![patch](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/patch/patch_sem_tabela.png)
 
-# DELETE /animes/id with id exist
+### DELETE /animes/id with id exist
 ![delete](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/delete/delete.png)
 
-# DELETE /animes/id with non-existent id
+### DELETE /animes/id with non-existent id
 ![delete](https://gitlab.com/chrystian14/anime-stock-returns/-/raw/main/imgs/delete/delete_sem_tabela.png)

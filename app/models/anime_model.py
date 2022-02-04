@@ -36,7 +36,13 @@ class Anime(DataBaseConnect):
         cls.create_table()
         cls.get_conn_cur()
 
-        cls.cur.execute("SELECT * FROM animes")
+        cls.cur.execute(
+            """
+            SELECT id, anime,
+            TO_CHAR(released_date, 'DD/MM/YYYY'), seasons 
+            FROM animes
+            """
+            )
 
         all_animes = cls.cur.fetchall()
 
@@ -49,7 +55,8 @@ class Anime(DataBaseConnect):
         cls.get_conn_cur()
 
         query = f"""
-            SELECT *
+            SELECT id, anime,
+            TO_CHAR(released_date, 'DD/MM/YYYY'), seasons
             FROM    animes
             WHERE id = {anime_id}
         """

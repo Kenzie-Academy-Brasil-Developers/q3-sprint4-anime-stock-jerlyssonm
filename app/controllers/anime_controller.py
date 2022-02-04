@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from datetime import datetime
 from flask import jsonify, request
 from app.helpers.helps import verify_key
 from app.models.anime_model import Anime
@@ -17,6 +18,7 @@ def save_new_anime():
         return verify_key(data, keys),HTTPStatus.UNPROCESSABLE_ENTITY
 
     anime_serialized = Anime.serialize_data(inserted_anime)
+    anime_serialized["released_date"] = anime_serialized["released_date"].strftime("%d/%m/%y")
     return jsonify(anime_serialized), HTTPStatus.CREATED
 
 
